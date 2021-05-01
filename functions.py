@@ -33,6 +33,10 @@ def clock(timezone,timestamp,stoptime):
 def triplex_line_conductor(name,resistance, geometric):
     return 'object triplex_line_conductor {\n'+f'\tname {name};\n'+f'\tresistance {resistance};\n'+f'\tgeometric_mean_radius {geometric};\n'+'}'
 
+def center_tapped_xfmr_object(name,phases,From,to,configuration):
+ 	return "object transformer {\n"+f"\tname {name};\n"+ f"\tphases {phases};\n"+f"\tfrom {From};\n"+f"\tto {to};\n"+f"\tconfiguration {configuration};"+"\n}"
+
+   
 def center_tapped_xfmr_config(name,power_rating,phase):
     return 'object transformer_configuration {\n'+f'\tname {name};\n'+f'\tconnect_type SINGLE_PHASE_CENTER_TAPPED;\n'+f'\tinstall_type POLETOP;\n'+f'\tpower{phase}_rating {power_rating};\n'+f'\tprimary_voltage 480.0;\n'+f'\tsecondary_voltage 120.0;\n'+f'\timpedance 0.006+0.0136j;\n'+'}'
 
