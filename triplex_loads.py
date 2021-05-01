@@ -29,6 +29,6 @@ while i < int(counter):
 OL = overhead_lines_objects("OL","C","646","xfrmr")
 print(OL)
 
-SP_xfmr = center_tapped_xfmr_object{"xfmr_CT","CS","node 646","trip_node_645","CS25_config"}
+SP_xfmr = center_tapped_xfmr_object("xfmr_CT","CS","node 646","trip_node_645","CS25_config")
 print(SP_xfmr)
 
