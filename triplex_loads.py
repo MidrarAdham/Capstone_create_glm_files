@@ -52,16 +52,19 @@ From = ["trip_node_652_A_"+str(x) for x in range(1,6)]
 '''
 
 def trips(counter,From):
-    xfmr = center_tapped_xfmr_object("xfmr_652A"+"_"+str(counter),"AS","meter_652_A","trip_node_652_A"+"_"+str(counter),"AS100_config")
+    xfmr = center_tapped_xfmr_object("xfmr_652_A"+"_"+str(counter),"AS","meter_652_A","trip_node_652_A"+"_"+str(counter),"AS100_config")
     print(xfmr)
     trip_nodes = trip_node("trip_node_652_A_"+str(counter),"AS")
     print(trip_nodes)
     for k in range(1,9):
         trip_line_counter = 8*(counter - 1) + k
         meter = meter_object("house_meter_"+str(trip_line_counter),"AS")
-        trip_lines = triplex_line("trip_line_652_A"+"_"+str(trip_line_counter),From,"trip_meter_652_A"+"_"+str(trip_line_counter),"AS")
+        trip_lines = triplex_line("trip_line_652_A"+"_"+str(trip_line_counter),From,"house_meter_"+str(trip_line_counter),"AS")
+        trip_lines_H = triplex_line("trip_line_house_meter_652_"+str(trip_line_counter),"house_meter_"+str(trip_line_counter),"trip_load_652_A"+"_"+str(trip_line_counter),"AS")
+ 
         print(trip_lines)
         print(meter)
+        print(trip_lines_H)
 
 #        print(trip_lines)
 #        print(xfmr)
@@ -72,7 +75,7 @@ def trips(counter,From):
 #        return starting_line
 
 for i in range(1,6):
-    trips(i,"trip_node_652A_"+str(i))
+    trips(i,"trip_node_652_A_"+str(i))
 
 '''
 for result in results:
