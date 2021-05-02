@@ -5,6 +5,9 @@ import random
 def trip_load_with_player(name,phases,house_no,file):
 	return "object triplex_load {\n"+f"\tname {name};\n"+ f"\tphases {phases};\n"+f"\tvoltage_1 120;\n"+f"\tvoltage_2 120;\n"+f"\tvoltage_N 0;\n"+f"\tnominal_voltage 120;\n"+"\tobject player {\n"+f"\t\tname House{house_no};\n"+f"\t\tfile {file}.csv;\n"+f"\t\tproperty constant_power_1;\n"+"\n\t};"+"\n}"
 
+def trip_node(name,phases):
+   return "object triplex_node {\n"+f"\tname {name};\n"+ f"\tphases {phases};\n"+f"\tnominal_voltage 120;"+"\n}"
+
 
 
 def player_obj(name,file):
@@ -13,9 +16,9 @@ def player_obj(name,file):
 def triplex_obj(name,phases,volt1, volt2,const_power,nominal):
     return "object triplex_load {\n"+ f"\tname {name};\n"+ f"\tphases {phases};\n" + f"\tvoltage_1 {volt1};\n" +f"\tvoltage_2 {volt2};\n"+\
            "\tvoltage_N 0;\n"+ f"\tconstant_power_1 {const_power};\n"+ f"\tnominal_voltage {nominal};\n"+"}"+'\n'
-def triplex_line(name,From, to, phases, length, config):
-    return "object triplex_line {\n"+f'\tname {name};\n'+f'\tfrom {From};\n'+f'\tto {to};\n'+f'\tphases {phases}S;\n\tlength {length};\n'+\
-            f'\tconfiguration {config};'+'\n}\n'
+def triplex_line(name,From, to, phases):
+    return "object triplex_line {\n"+f'\tname {name};\n'+f'\tfrom {From};\n'+f'\tto {to};\n'+f'\tphases {phases};\n\tlength 10;\n'+\
+            f'\tconfiguration triplex_line_configuration_1;'+'\n}\n'
 def house(name,parent):
     return "object house {\n"+f'\tname {name};\n'+f'\tparent {parent};\n'+'}\n'
 
@@ -44,7 +47,7 @@ def padmount_xfmr_config(connect_type,power_rating,primary_voltage,secondary_vol
     return 'object transformer_configuration {\n'+f'\tconnect_type {connect_type};\n'+f'\tinstall_type PADMOUNT;\n'+f'\tpower_rating {power_rating};\n'+f'\tprimary_voltage {primary_voltage};\n'+f'\tsecondary_voltage {secondary_voltage};\n'+f'\timpedance 0.011+0.02j;\n'+'}'
 
 def meter_object(name,phases):
-    return 'object meter {\n'+f'\tname {name};\n'+f'\tphases {phases};\n'+f'\tnominal_voltage 2401.7771;\n'+'}'
+    return 'object meter {\n'+f'\tname {name};\n'+f'\tphases {phases};\n'+f'\tnominal_voltage 120;\n'+'}'
 
 def overhead_lines_objects(name,phases,from_node,to_node):
     return 'object overhead_line {\n'+f'\tname OH{name};\n'+f'\tphases {phases};\n'+f'\tfrom {from_node};\n'+f'\tto {to_node};\n'+f'\tlength {10};\n'+f'\tconfiguration line_configurationn:605;\n'+'}'
