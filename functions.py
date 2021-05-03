@@ -46,6 +46,11 @@ def center_tapped_xfmr_config(name,power_rating,phase):
 def padmount_xfmr_config(connect_type,power_rating,primary_voltage,secondary_voltage):
     return 'object transformer_configuration {\n'+f'\tconnect_type {connect_type};\n'+f'\tinstall_type PADMOUNT;\n'+f'\tpower_rating {power_rating};\n'+f'\tprimary_voltage {primary_voltage};\n'+f'\tsecondary_voltage {secondary_voltage};\n'+f'\timpedance 0.011+0.02j;\n'+'}'
 
+def trip_meter_object(name,phases):
+    return 'object triplex_meter {\n'+f'\tname {name};\n'+f'\tphases {phases};\n'+f'\tnominal_voltage 120;\n'+'}'
+
+
+
 def meter_object(name,phases):
     return 'object meter {\n'+f'\tname {name};\n'+f'\tphases {phases};\n'+f'\tnominal_voltage 120;\n'+'}'
 
