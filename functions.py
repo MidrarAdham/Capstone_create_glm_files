@@ -3,7 +3,7 @@ import json
 import random
 
 def trip_load_with_player(name,phases,house_no,file):
-	return "object triplex_load {\n"+f"\tname {name};\n"+ f"\tphases {phases};\n"+f"\tvoltage_1 120;\n"+f"\tvoltage_2 120;\n"+f"\tvoltage_N 0;\n"+f"\tnominal_voltage 120;\n"+"\tobject player {\n"+f"\t\tname House{house_no};\n"+f"\t\tfile {file}.csv;\n"+f"\t\tproperty constant_power_1;\n"+"\n\t};"+"\n}"
+	return "object triplex_load {\n"+f"\tname {name};\n"+ f"\tphases {phases};\n"+f"\tvoltage_1 120;\n"+f"\tvoltage_2 120;\n"+f"\tvoltage_N 0;\n"+f"\tnominal_voltage 120;\n"+"\tobject player {\n"+f"\t\tname {house_no};\n"+f"\t\tfile {file}.csv;\n"+f"\t\tproperty constant_power_1;\n"+"\n\t};"+"\n}"
 
 def trip_node(name,phases):
    return "object triplex_node {\n"+f"\tname {name};\n"+ f"\tphases {phases};\n"+f"\tnominal_voltage 120;"+"\n}"

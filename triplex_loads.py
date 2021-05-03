@@ -60,19 +60,15 @@ def trips(counter,From):
         trip_line_counter = 8*(counter - 1) + k
         meter = meter_object("house_meter_"+str(trip_line_counter),"AS")
         trip_lines = triplex_line("trip_line_652_A"+"_"+str(trip_line_counter),From,"house_meter_"+str(trip_line_counter),"AS")
-        trip_lines_H = triplex_line("trip_line_house_meter_652_"+str(trip_line_counter),"house_meter_"+str(trip_line_counter),"trip_load_652_A"+"_"+str(trip_line_counter),"AS")
+        trip_lines_H = triplex_line("trip_line_652_A_h_"+str(trip_line_counter),"house_meter_"+str(trip_line_counter),"trip_load_652_A_h"+"_"+str(trip_line_counter),"AS")
+        trip_lines_L = triplex_line("trip_line_652_A_L_"+str(trip_line_counter),"house_meter_"+str(trip_line_counter),"trip_load_652_A_L"+"_"+str(trip_line_counter),"AS")
+        #trip_load_player = trip_load_with_player("trip_load_652_A_h_"+str(trip_line_counter),"AS","_652_A_"+str())
  
+        
         print(trip_lines)
         print(meter)
         print(trip_lines_H)
-
-#        print(trip_lines)
-#        print(xfmr)
-#        print(trip_nodes)
-#        starting_line = starting_line + 1
-#        print(trip_lines)
-#       print(meter)
-#        return starting_line
+        print(trip_lines_L)
 
 for i in range(1,6):
     trips(i,"trip_node_652_A_"+str(i))
