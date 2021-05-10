@@ -52,12 +52,14 @@ From = ["trip_node_652_A_"+str(x) for x in range(1,6)]
 '''
 
 def trips(counter,From):
-    xfmr = center_tapped_xfmr_object("xfmr_652_A_"+str(counter),"AS","meter_652_A","xfmr_meter_652_A_"+str(counter),"AS100_config")
+    node_OL = overhead_lines_objects("OL_652_A_xfmr_652_A_"+str(counter),"AN","meter_652_A","xfmr_meter_652_A_"+str(counter))
+    print(node_OL)
+    HS_meter = meter_object("xfmr_meter_652_A_"+str(counter),"AN")
+    print(HS_meter)
+    xfmr = center_tapped_xfmr_object("xfmr_652_A_"+str(counter),"AS","xfmr_meter_652_A_"+str(counter),"trip_node_652_A_"+str(counter),"AS100_config")
     print(xfmr)
-    trip_meter = trip_meter_object("xfmr_meter_652_A_"+str(counter),"AS")
-    print(trip_meter)
     trip_line = triplex_line("xfmr_trip_line_652_A_"+str(counter),"xfmr_meter_652_A_"+str(counter),"trip_node_652_A_"+str(counter),"AS")
-    print(trip_line)
+#    print(trip_line)
     trip_nodes = trip_node("trip_node_652_A_"+str(counter),"AS")
     print(trip_nodes)
     for k in range(1,9):

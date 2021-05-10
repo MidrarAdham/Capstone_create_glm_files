@@ -52,10 +52,10 @@ def trip_meter_object(name,phases):
 
 
 def meter_object(name,phases):
-    return 'object meter {\n'+f'\tname {name};\n'+f'\tphases {phases};\n'+f'\tnominal_voltage 120;\n'+'}'
+    return 'object meter {\n'+f'\tname {name};\n'+f'\tphases {phases};\n'+f'\tnominal_voltage 2401.7771;\n'+'}'
 
 def overhead_lines_objects(name,phases,from_node,to_node):
-    return 'object overhead_line {\n'+f'\tname OH{name};\n'+f'\tphases {phases};\n'+f'\tfrom {from_node};\n'+f'\tto {to_node};\n'+f'\tlength {10};\n'+f'\tconfiguration line_configurationn:605;\n'+'}'
+    return 'object overhead_line {\n'+f'\tname {name};\n'+f'\tphases {phases};\n'+f'\tfrom {from_node};\n'+f'\tto {to_node};\n'+f'\tlength {10};\n'+f'\tconfiguration line_configuration:655;\n'+'}'
 
 def one_line_module(name):
     return f'module {name};\n'
