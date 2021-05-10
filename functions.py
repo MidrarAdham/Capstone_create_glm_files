@@ -53,6 +53,11 @@ def trip_meter_object(name,phases):
 
 def meter_object(name,phases):
     return 'object meter {\n'+f'\tname {name};\n'+f'\tphases {phases};\n'+f'\tnominal_voltage 2401.7771;\n'+'}'
+'''
+def multirecorder_object(filename):
+    return 'object multi_recorder {\n'+f'\tinterval {900};\n'+f'\tproperty {phases};\n'+f'\tnominal_voltage 2401.7771;\n'+'}'
+'''
+
 
 def overhead_lines_objects(name,phases,from_node,to_node):
     return 'object overhead_line {\n'+f'\tname {name};\n'+f'\tphases {phases};\n'+f'\tfrom {from_node};\n'+f'\tto {to_node};\n'+f'\tlength {10};\n'+f'\tconfiguration line_configuration:655;\n'+'}'
