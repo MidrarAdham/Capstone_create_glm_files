@@ -655,3 +655,28 @@ object meter {
 	phases "AN";
 	nominal_voltage 2401.7771;
 }
+
+//Node 611
+object node:611 {
+	name N611;
+	phases "CN";
+	voltage_A 2401.7771;
+	voltage_B -1200.8886-2080.000j;
+	voltage_C -1200.8886+2080.000j;
+	nominal_voltage 2401.7771;
+}
+
+object overhead_line {
+	name OL_611_C;
+	phases "CN";
+	from N611;
+	to meter_611_C;
+	length 10;
+	configuration line_configuration:605;
+}
+
+object meter {
+	name meter_611_C;
+	phases "CN";
+	nominal_voltage 2401.7771;
+}

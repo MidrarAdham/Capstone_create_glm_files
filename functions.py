@@ -1,14 +1,12 @@
-import glm
-import json
-import random
+# import glm
+# import json
+# import random
 
 def trip_load_with_player(name,phases,house_no,file):
 	return "object triplex_load {\n"+f"\tname {name};\n"+ f"\tphases {phases};\n"+f"\tvoltage_1 120;\n"+f"\tvoltage_2 120;\n"+f"\tvoltage_N 0;\n"+f"\tnominal_voltage 120;\n"+"\tobject player {\n"+f"\t\tname {house_no};\n"+f"\t\tfile {file}.csv;\n"+f"\t\tproperty constant_power_1;\n"+"\n\t};"+"\n}"
 
 def trip_node(name,phases):
    return "object triplex_node {\n"+f"\tname {name};\n"+ f"\tphases {phases};\n"+f"\tnominal_voltage 120;"+"\n}"
-
-
 
 def player_obj(name,file):
     return "object player {\n" + f"\tname {name};\n" + f"\tfile \"{file}.csv\";\n"+"};"
@@ -39,7 +37,6 @@ def triplex_line_conductor(name,resistance, geometric):
 def center_tapped_xfmr_object(name,phases,From,to,configuration):
  	return "object transformer {\n"+f"\tname {name};\n"+ f"\tphases {phases};\n"+f"\tfrom {From};\n"+f"\tto {to};\n"+f"\tconfiguration {configuration};"+"\n}"
 
-   
 def center_tapped_xfmr_config(name,power_rating,phase):
     return 'object transformer_configuration {\n'+f'\tname {name};\n'+f'\tconnect_type SINGLE_PHASE_CENTER_TAPPED;\n'+f'\tinstall_type POLETOP;\n'+f'\tpower{phase}_rating {power_rating};\n'+f'\tprimary_voltage 480.0;\n'+f'\tsecondary_voltage 120.0;\n'+f'\timpedance 0.006+0.0136j;\n'+'}'
 
@@ -48,8 +45,6 @@ def padmount_xfmr_config(connect_type,power_rating,primary_voltage,secondary_vol
 
 def trip_meter_object(name,phases):
     return 'object triplex_meter {\n'+f'\tname {name};\n'+f'\tphases {phases};\n'+f'\tnominal_voltage 120;\n'+'}'
-
-
 
 def meter_object(name,phases):
     return 'object meter {\n'+f'\tname {name};\n'+f'\tphases {phases};\n'+f'\tnominal_voltage 2401.7771;\n'+'}'
@@ -60,7 +55,7 @@ def multirecorder_object(filename):
 
 
 def overhead_lines_objects(name,phases,from_node,to_node):
-    return 'object overhead_line {\n'+f'\tname {name};\n'+f'\tphases {phases};\n'+f'\tfrom {from_node};\n'+f'\tto {to_node};\n'+f'\tlength {10};\n'+f'\tconfiguration line_configuration:655;\n'+'}'
+    return 'object overhead_line {\n'+f'\tname {name};\n'+f'\tphases {phases};\n'+f'\tfrom {from_node};\n'+f'\tto {to_node};\n'+f'\tlength {10};\n'+f'\tconfiguration line_configuration:605;\n'+'}'
 
 def one_line_module(name):
     return f'module {name};\n'
