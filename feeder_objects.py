@@ -13,10 +13,10 @@ def trips(counter,From):
     print(trip_nodes)
     for k in range(1,9):
         trip_line_counter = 8*(counter - 1) + k
-        meter = trip_meter_object("house_meter_"+str(trip_line_counter),"AS")
-        trip_lines = triplex_line("trip_line_652_A"+"_"+str(trip_line_counter),From,"house_meter_"+str(trip_line_counter),"AS")
-        trip_lines_H = triplex_line("trip_line_652_A_h_"+str(trip_line_counter),"house_meter_"+str(trip_line_counter),"trip_load_652_A_h"+"_"+str(trip_line_counter),"AS")
-        trip_lines_L = triplex_line("trip_line_652_A_L_"+str(trip_line_counter),"house_meter_"+str(trip_line_counter),"trip_load_652_A_L"+"_"+str(trip_line_counter),"AS")
+        meter = trip_meter_object("house_meter_652_A_"+str(trip_line_counter),"AS")
+        trip_lines = triplex_line("trip_line_652_A_"+str(trip_line_counter),From,"house_meter_652_A_"+str(trip_line_counter),"AS")
+        trip_lines_H = triplex_line("trip_line_652_A_h_"+str(trip_line_counter),"house_meter_652_A_"+str(trip_line_counter),"trip_load_652_A_h"+"_"+str(trip_line_counter),"AS")
+        trip_lines_L = triplex_line("trip_line_652_A_L_"+str(trip_line_counter),"house_meter_652_A_"+str(trip_line_counter),"trip_load_652_A_L"+"_"+str(trip_line_counter),"AS")
         #trip_load_player = trip_load_with_player("trip_load_652_A_h_"+str(trip_line_counter),"AS","_652_A_"+str())
 
 
@@ -52,10 +52,10 @@ def trips_611(counter,From):
     print(trip_nodes)
     for k in range(1,9):
         trip_line_counter = 8*(counter - 1) + k
-        meter = trip_meter_object("house_meter_"+str(trip_line_counter),"CS")
-        trip_lines = triplex_line("trip_line_611_C_"+str(trip_line_counter),From,"house_meter_"+str(trip_line_counter),"CS")
-        trip_lines_H = triplex_line("trip_line_611_C_h_"+str(trip_line_counter),"house_meter_"+str(trip_line_counter),"trip_load_611_C_h"+"_"+str(trip_line_counter),"CS")
-        trip_lines_L = triplex_line("trip_line_611_C_L_"+str(trip_line_counter),"house_meter_"+str(trip_line_counter),"trip_load_611_C_L"+"_"+str(trip_line_counter),"CS")
+        meter = trip_meter_object("house_meter_611_C_"+str(trip_line_counter),"CS")
+        trip_lines = triplex_line("trip_line_611_C_"+str(trip_line_counter),From,"house_meter_611_C_"+str(trip_line_counter),"CS")
+        trip_lines_H = triplex_line("trip_line_611_C_h_"+str(trip_line_counter),"house_meter_611_C_"+str(trip_line_counter),"trip_load_611_C_h"+"_"+str(trip_line_counter),"CS")
+        trip_lines_L = triplex_line("trip_line_611_C_L_"+str(trip_line_counter),"house_meter_611_C_"+str(trip_line_counter),"trip_load_611_C_L"+"_"+str(trip_line_counter),"CS")
         #trip_load_player = trip_load_with_player("trip_load_652_A_h_"+str(trip_line_counter),"AS","_652_A_"+str())
 
 
