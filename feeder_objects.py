@@ -1,7 +1,7 @@
 from functions import *
 
 def trips(counter,From):
-    node_OL = overhead_lines_objects("OL_652_A_xfmr_652_A_"+str(counter),"AN","meter_652_A","xfmr_meter_652_A_"+str(counter))
+    node_OL = overhead_lines_objects("OL_652_A_xfmr_652_A_"+str(counter),"AN","meter_652_A","xfmr_meter_652_A_"+str(counter),"655")
     print(node_OL)
     HS_meter = meter_object("xfmr_meter_652_A_"+str(counter),"AN")
     print(HS_meter)
@@ -40,7 +40,7 @@ for i in range(1,6):
 
 
 def trips_611(counter,From):
-    node_OL = overhead_lines_objects("OL_611_C_xfmr_611_C_"+str(counter),"AN","meter_611_C","xfmr_meter_611_C_"+str(counter))
+    node_OL = overhead_lines_objects("OL_611_C_xfmr_611_C_"+str(counter),"CN","meter_611_C","xfmr_meter_611_C_"+str(counter),"605")
     print(node_OL)
     HS_meter = meter_object("xfmr_meter_611_C_"+str(counter),"CN")
     print(HS_meter)

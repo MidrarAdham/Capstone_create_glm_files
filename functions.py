@@ -54,8 +54,8 @@ def multirecorder_object(filename):
 '''
 
 
-def overhead_lines_objects(name,phases,from_node,to_node):
-    return 'object overhead_line {\n'+f'\tname {name};\n'+f'\tphases {phases};\n'+f'\tfrom {from_node};\n'+f'\tto {to_node};\n'+f'\tlength {10};\n'+f'\tconfiguration line_configuration:605;\n'+'}'
+def overhead_lines_objects(name,phases,from_node,to_node,config):
+    return 'object overhead_line {\n'+f'\tname {name};\n'+f'\tphases {phases};\n'+f'\tfrom {from_node};\n'+f'\tto {to_node};\n'+f'\tlength {10};\n'+f'\tconfiguration line_configuration:{config};\n'+'}'
 
 def one_line_module(name):
     return f'module {name};\n'

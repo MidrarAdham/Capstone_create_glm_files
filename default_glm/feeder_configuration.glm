@@ -405,13 +405,6 @@ object node:6321 {
 }
 
 // Create node objects with attached loads
-//Node 611
-object node:611 {
-	name N611;
-	phases "CN";
-	voltage_C -1200.8886+2080.000j;
-	nominal_voltage 2401.7771;
-}
 
 //Node 634
 object node:634 {
