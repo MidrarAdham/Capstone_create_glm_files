@@ -3,7 +3,8 @@ from functions import*
 nodes = [
          (652, "A", "AS"), 
          (611, "C", "CS"), 
-         (684, "C", "CS")
+         (684, "C", "CS"),
+         (684, "A", "AS")
         ]
 fileNumber = 1
 

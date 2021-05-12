@@ -184,6 +184,12 @@ object line_configuration:655 {
 	spacing line_spacing:510;
 }
 
+object line_configuration:656 {
+	conductor_B overhead_line_conductor:6030;
+	conductor_N overhead_line_conductor:6030;
+	spacing line_spacing:510;
+}
+
 // Underground line configuration
 object line_spacing:515 {
 	distance_AB 0.500000;
@@ -319,15 +325,7 @@ object overhead_line:632633 {
 }
 
 // Create node objects
-//Node 633
-object node:633 {
-	name N633;
-	phases "ABCN";
-	voltage_A 2401.7771;
-	voltage_B -1200.8886-2080.000j;
-	voltage_C -1200.8886+2080.000j;
-	nominal_voltage 2401.7771;
-}
+
 //Node 630
 object node:630 {
 	name N630;
@@ -407,15 +405,7 @@ object node:634 {
 	voltage_C -240.000+415.6922j;
 	nominal_voltage 480.000;
 }
-//Node 645
-object node:645 {
-	name N645;
-	phases "BCN";
-	voltage_A 2401.7771;
-	voltage_B -1200.8886-2080.000j;
-	voltage_C -1200.8886+2080.000j;
-	nominal_voltage 2401.7771;
-}
+
 
 
 //Node 675
@@ -666,7 +656,7 @@ object meter {
 	nominal_voltage 2401.7771;
 }
 
-//Node 684
+//Node 684 | 2-phase (A C)
 object node:684 {
 	name N684;
 	phases "ACN";
@@ -703,6 +693,58 @@ object meter {
 object meter {
 	name meter_684_C;
 	phases "CN";
+	nominal_voltage 2401.7771;
+}
+
+//Node 645 | 2-phase (B C)
+//Node 645
+object node:645 {
+	name N645;
+	phases "BCN";
+	voltage_A 2401.7771;
+	voltage_B -1200.8886-2080.000j;
+	voltage_C -1200.8886+2080.000j;
+	nominal_voltage 2401.7771;
+}
+
+object overhead_line {
+	name OL_645_B; //645toM645 line from node to node meter
+	phases "BN";
+	from N645;
+	to meter_645_B;
+	length 10;
+	configuration line_configuration:656;
+}
+
+object overhead_line {
+	name OL_645_C; //645toM645 line from node to node meter
+	phases "CN";
+	from N645;
+	to meter_645_C;
+	length 10;
+	configuration line_configuration:605;
+}
+
+object meter {
+	name meter_645_B;
+	phases "BN";
+	nominal_voltage 2401.7771;
+}
+
+object meter {
+	name meter_645_C;
+	phases "CN";
+	nominal_voltage 2401.7771;
+}
+
+//Node 633 | 3-phase
+//Node 633
+object node:633 {
+	name N633;
+	phases "ABCN";
+	voltage_A 2401.7771;
+	voltage_B -1200.8886-2080.000j;
+	voltage_C -1200.8886+2080.000j;
 	nominal_voltage 2401.7771;
 }
 /////////////////////////////
@@ -769,7 +811,29 @@ object multi_recorder {
     property meter_684_C:measured_power.real,xfmr_meter_684_C_1:measured_power.real,xfmr_meter_684_C_2:measured_power.real,xfmr_meter_684_C_3:measured_power.real,xfmr_meter_684_C_4:measured_power.real,xfmr_meter_684_C_5:measured_power.real,house_meter_684_C_1:measured_power.real,house_meter_684_C_2:measured_power.real,house_meter_684_C_3:measured_power.real,house_meter_684_C_4:measured_power.real,house_meter_684_C_5:measured_power.real,house_meter_684_C_6:measured_power.real,house_meter_684_C_7:measured_power.real,house_meter_684_C_8:measured_power.real,house_meter_684_C_9:measured_power.real,house_meter_684_C_10:measured_power.real,house_meter_684_C_11:measured_power.real,house_meter_684_C_12:measured_power.real,house_meter_684_C_13:measured_power.real,house_meter_684_C_14:measured_power.real,house_meter_684_C_15:measured_power.real,house_meter_684_C_16:measured_power.real,house_meter_684_C_17:measured_power.real,house_meter_684_C_18:measured_power.real,house_meter_684_C_19:measured_power.real;
     file Meter_684_C_Power.real.csv;
 }
+
+object multi_recorder{
+	interval 900;
+	property house_meter_684_C_20:measured_power.real,house_meter_684_C_21:measured_power.real,house_meter_684_C_22:measured_power.real,house_meter_684_C_23:measured_power.real,house_meter_684_C_24:measured_power.real,house_meter_684_C_25:measured_power.real,house_meter_684_C_26:measured_power.real,house_meter_684_C_27:measured_power.real,house_meter_684_C_28:measured_power.real,house_meter_684_C_29:measured_power.real,house_meter_684_C_30:measured_power.real,house_meter_684_C_31:measured_power.real,house_meter_684_C_32:measured_power.real,house_meter_684_C_33:measured_power.real,house_meter_684_C_34:measured_power.real,house_meter_684_C_35:measured_power.real,house_meter_684_C_36:measured_power.real,house_meter_684_C_37:measured_power.real,house_meter_684_C_38:measured_power.real,house_meter_684_C_39:measured_power.real,house_meter_684_C_40:measured_power.real;
+	file 1Meter_684_C_power.real.csv;
+}
+
+// VA power
+object multi_recorder {
+    interval 900;
+    property meter_684_C:measured_power,xfmr_meter_684_C_1:measured_power,xfmr_meter_684_C_2:measured_power,xfmr_meter_684_C_3:measured_power,xfmr_meter_684_C_4:measured_power,xfmr_meter_684_C_5:measured_power,house_meter_684_C_1:measured_power,house_meter_684_C_2:measured_power,house_meter_684_C_3:measured_power,house_meter_684_C_4:measured_power,house_meter_684_C_5:measured_power,house_meter_684_C_6:measured_power,house_meter_684_C_7:measured_power,house_meter_684_C_8:measured_power,house_meter_684_C_9:measured_power,house_meter_684_C_10:measured_power,house_meter_684_C_11:measured_power,house_meter_684_C_12:measured_power,house_meter_684_C_13:measured_power,house_meter_684_C_14:measured_power,house_meter_684_C_15:measured_power,house_meter_684_C_16:measured_power,house_meter_684_C_17:measured_power,house_meter_684_C_18:measured_power,house_meter_684_C_19:measured_power,house_meter_684_C_20:measured_power,house_meter_684_C_21:measured_power,house_meter_684_C_22:measured_power,house_meter_684_C_23:measured_power;
+    file Meter_684_C_Power.csv;
+}
+
+object multi_recorder{
+	interval 900;
+	property house_meter_684_C_24:measured_power,house_meter_684_C_25:measured_power,house_meter_684_C_26:measured_power,house_meter_684_C_27:measured_power,house_meter_684_C_28:measured_power,house_meter_684_C_29:measured_power,house_meter_684_C_30:measured_power,house_meter_684_C_31:measured_power,house_meter_684_C_32:measured_power,house_meter_684_C_33:measured_power,house_meter_684_C_34:measured_power,house_meter_684_C_35:measured_power,house_meter_684_C_36:measured_power,house_meter_684_C_37:measured_power,house_meter_684_C_38:measured_power,house_meter_684_C_39:measured_power,house_meter_684_C_40:measured_power;
+	file 1Meter_684_C_power.csv;
+}
+
+
 // Paste feeder_objects.py below
+
 
 object overhead_line {
 	name OL_652_A_xfmr_652_A_1;
@@ -4982,6 +5046,1411 @@ object triplex_line {
 	from house_meter_684_C_40;
 	to trip_load_684_C_L_40;
 	phases CS;
+	length 10;
+	configuration triplex_line_configuration_1;
+}
+
+object overhead_line {
+	name OL_684_A_xfmr_684_A_1;
+	phases AN;
+	from meter_684_A;
+	to xfmr_meter_684_A_1;
+	length 10;
+	configuration line_configuration:655;
+}
+object meter {
+	name xfmr_meter_684_A_1;
+	phases AN;
+	nominal_voltage 2401.7771;
+}
+object transformer {
+	name xfmr_684_A_1;
+	phases AS;
+	from xfmr_meter_684_A_1;
+	to trip_node_684_A_1;
+	configuration AS100_config;
+}
+object triplex_node {
+	name trip_node_684_A_1;
+	phases AS;
+	nominal_voltage 120;
+}
+object triplex_line {
+	name trip_line_684_A_1;
+	from trip_node_684_A_1;
+	to house_meter_684_A_1;
+	phases AS;
+	length 10;
+	configuration triplex_line_configuration_1;
+}
+
+object triplex_meter {
+	name house_meter_684_A_1;
+	phases AS;
+	nominal_voltage 120;
+}
+object triplex_line {
+	name trip_line_684_A_h_1;
+	from house_meter_684_A_1;
+	to trip_load_684_A_h_1;
+	phases AS;
+	length 10;
+	configuration triplex_line_configuration_1;
+}
+
+object triplex_line {
+	name trip_line_684_A_L_1;
+	from house_meter_684_A_1;
+	to trip_load_684_A_L_1;
+	phases AS;
+	length 10;
+	configuration triplex_line_configuration_1;
+}
+
+object triplex_line {
+	name trip_line_684_A_2;
+	from trip_node_684_A_1;
+	to house_meter_684_A_2;
+	phases AS;
+	length 10;
+	configuration triplex_line_configuration_1;
+}
+
+object triplex_meter {
+	name house_meter_684_A_2;
+	phases AS;
+	nominal_voltage 120;
+}
+object triplex_line {
+	name trip_line_684_A_h_2;
+	from house_meter_684_A_2;
+	to trip_load_684_A_h_2;
+	phases AS;
+	length 10;
+	configuration triplex_line_configuration_1;
+}
+
+object triplex_line {
+	name trip_line_684_A_L_2;
+	from house_meter_684_A_2;
+	to trip_load_684_A_L_2;
+	phases AS;
+	length 10;
+	configuration triplex_line_configuration_1;
+}
+
+object triplex_line {
+	name trip_line_684_A_3;
+	from trip_node_684_A_1;
+	to house_meter_684_A_3;
+	phases AS;
+	length 10;
+	configuration triplex_line_configuration_1;
+}
+
+object triplex_meter {
+	name house_meter_684_A_3;
+	phases AS;
+	nominal_voltage 120;
+}
+object triplex_line {
+	name trip_line_684_A_h_3;
+	from house_meter_684_A_3;
+	to trip_load_684_A_h_3;
+	phases AS;
+	length 10;
+	configuration triplex_line_configuration_1;
+}
+
+object triplex_line {
+	name trip_line_684_A_L_3;
+	from house_meter_684_A_3;
+	to trip_load_684_A_L_3;
+	phases AS;
+	length 10;
+	configuration triplex_line_configuration_1;
+}
+
+object triplex_line {
+	name trip_line_684_A_4;
+	from trip_node_684_A_1;
+	to house_meter_684_A_4;
+	phases AS;
+	length 10;
+	configuration triplex_line_configuration_1;
+}
+
+object triplex_meter {
+	name house_meter_684_A_4;
+	phases AS;
+	nominal_voltage 120;
+}
+object triplex_line {
+	name trip_line_684_A_h_4;
+	from house_meter_684_A_4;
+	to trip_load_684_A_h_4;
+	phases AS;
+	length 10;
+	configuration triplex_line_configuration_1;
+}
+
+object triplex_line {
+	name trip_line_684_A_L_4;
+	from house_meter_684_A_4;
+	to trip_load_684_A_L_4;
+	phases AS;
+	length 10;
+	configuration triplex_line_configuration_1;
+}
+
+object triplex_line {
+	name trip_line_684_A_5;
+	from trip_node_684_A_1;
+	to house_meter_684_A_5;
+	phases AS;
+	length 10;
+	configuration triplex_line_configuration_1;
+}
+
+object triplex_meter {
+	name house_meter_684_A_5;
+	phases AS;
+	nominal_voltage 120;
+}
+object triplex_line {
+	name trip_line_684_A_h_5;
+	from house_meter_684_A_5;
+	to trip_load_684_A_h_5;
+	phases AS;
+	length 10;
+	configuration triplex_line_configuration_1;
+}
+
+object triplex_line {
+	name trip_line_684_A_L_5;
+	from house_meter_684_A_5;
+	to trip_load_684_A_L_5;
+	phases AS;
+	length 10;
+	configuration triplex_line_configuration_1;
+}
+
+object triplex_line {
+	name trip_line_684_A_6;
+	from trip_node_684_A_1;
+	to house_meter_684_A_6;
+	phases AS;
+	length 10;
+	configuration triplex_line_configuration_1;
+}
+
+object triplex_meter {
+	name house_meter_684_A_6;
+	phases AS;
+	nominal_voltage 120;
+}
+object triplex_line {
+	name trip_line_684_A_h_6;
+	from house_meter_684_A_6;
+	to trip_load_684_A_h_6;
+	phases AS;
+	length 10;
+	configuration triplex_line_configuration_1;
+}
+
+object triplex_line {
+	name trip_line_684_A_L_6;
+	from house_meter_684_A_6;
+	to trip_load_684_A_L_6;
+	phases AS;
+	length 10;
+	configuration triplex_line_configuration_1;
+}
+
+object triplex_line {
+	name trip_line_684_A_7;
+	from trip_node_684_A_1;
+	to house_meter_684_A_7;
+	phases AS;
+	length 10;
+	configuration triplex_line_configuration_1;
+}
+
+object triplex_meter {
+	name house_meter_684_A_7;
+	phases AS;
+	nominal_voltage 120;
+}
+object triplex_line {
+	name trip_line_684_A_h_7;
+	from house_meter_684_A_7;
+	to trip_load_684_A_h_7;
+	phases AS;
+	length 10;
+	configuration triplex_line_configuration_1;
+}
+
+object triplex_line {
+	name trip_line_684_A_L_7;
+	from house_meter_684_A_7;
+	to trip_load_684_A_L_7;
+	phases AS;
+	length 10;
+	configuration triplex_line_configuration_1;
+}
+
+object triplex_line {
+	name trip_line_684_A_8;
+	from trip_node_684_A_1;
+	to house_meter_684_A_8;
+	phases AS;
+	length 10;
+	configuration triplex_line_configuration_1;
+}
+
+object triplex_meter {
+	name house_meter_684_A_8;
+	phases AS;
+	nominal_voltage 120;
+}
+object triplex_line {
+	name trip_line_684_A_h_8;
+	from house_meter_684_A_8;
+	to trip_load_684_A_h_8;
+	phases AS;
+	length 10;
+	configuration triplex_line_configuration_1;
+}
+
+object triplex_line {
+	name trip_line_684_A_L_8;
+	from house_meter_684_A_8;
+	to trip_load_684_A_L_8;
+	phases AS;
+	length 10;
+	configuration triplex_line_configuration_1;
+}
+
+object overhead_line {
+	name OL_684_A_xfmr_684_A_2;
+	phases AN;
+	from meter_684_A;
+	to xfmr_meter_684_A_2;
+	length 10;
+	configuration line_configuration:655;
+}
+object meter {
+	name xfmr_meter_684_A_2;
+	phases AN;
+	nominal_voltage 2401.7771;
+}
+object transformer {
+	name xfmr_684_A_2;
+	phases AS;
+	from xfmr_meter_684_A_2;
+	to trip_node_684_A_2;
+	configuration AS100_config;
+}
+object triplex_node {
+	name trip_node_684_A_2;
+	phases AS;
+	nominal_voltage 120;
+}
+object triplex_line {
+	name trip_line_684_A_9;
+	from trip_node_684_A_2;
+	to house_meter_684_A_9;
+	phases AS;
+	length 10;
+	configuration triplex_line_configuration_1;
+}
+
+object triplex_meter {
+	name house_meter_684_A_9;
+	phases AS;
+	nominal_voltage 120;
+}
+object triplex_line {
+	name trip_line_684_A_h_9;
+	from house_meter_684_A_9;
+	to trip_load_684_A_h_9;
+	phases AS;
+	length 10;
+	configuration triplex_line_configuration_1;
+}
+
+object triplex_line {
+	name trip_line_684_A_L_9;
+	from house_meter_684_A_9;
+	to trip_load_684_A_L_9;
+	phases AS;
+	length 10;
+	configuration triplex_line_configuration_1;
+}
+
+object triplex_line {
+	name trip_line_684_A_10;
+	from trip_node_684_A_2;
+	to house_meter_684_A_10;
+	phases AS;
+	length 10;
+	configuration triplex_line_configuration_1;
+}
+
+object triplex_meter {
+	name house_meter_684_A_10;
+	phases AS;
+	nominal_voltage 120;
+}
+object triplex_line {
+	name trip_line_684_A_h_10;
+	from house_meter_684_A_10;
+	to trip_load_684_A_h_10;
+	phases AS;
+	length 10;
+	configuration triplex_line_configuration_1;
+}
+
+object triplex_line {
+	name trip_line_684_A_L_10;
+	from house_meter_684_A_10;
+	to trip_load_684_A_L_10;
+	phases AS;
+	length 10;
+	configuration triplex_line_configuration_1;
+}
+
+object triplex_line {
+	name trip_line_684_A_11;
+	from trip_node_684_A_2;
+	to house_meter_684_A_11;
+	phases AS;
+	length 10;
+	configuration triplex_line_configuration_1;
+}
+
+object triplex_meter {
+	name house_meter_684_A_11;
+	phases AS;
+	nominal_voltage 120;
+}
+object triplex_line {
+	name trip_line_684_A_h_11;
+	from house_meter_684_A_11;
+	to trip_load_684_A_h_11;
+	phases AS;
+	length 10;
+	configuration triplex_line_configuration_1;
+}
+
+object triplex_line {
+	name trip_line_684_A_L_11;
+	from house_meter_684_A_11;
+	to trip_load_684_A_L_11;
+	phases AS;
+	length 10;
+	configuration triplex_line_configuration_1;
+}
+
+object triplex_line {
+	name trip_line_684_A_12;
+	from trip_node_684_A_2;
+	to house_meter_684_A_12;
+	phases AS;
+	length 10;
+	configuration triplex_line_configuration_1;
+}
+
+object triplex_meter {
+	name house_meter_684_A_12;
+	phases AS;
+	nominal_voltage 120;
+}
+object triplex_line {
+	name trip_line_684_A_h_12;
+	from house_meter_684_A_12;
+	to trip_load_684_A_h_12;
+	phases AS;
+	length 10;
+	configuration triplex_line_configuration_1;
+}
+
+object triplex_line {
+	name trip_line_684_A_L_12;
+	from house_meter_684_A_12;
+	to trip_load_684_A_L_12;
+	phases AS;
+	length 10;
+	configuration triplex_line_configuration_1;
+}
+
+object triplex_line {
+	name trip_line_684_A_13;
+	from trip_node_684_A_2;
+	to house_meter_684_A_13;
+	phases AS;
+	length 10;
+	configuration triplex_line_configuration_1;
+}
+
+object triplex_meter {
+	name house_meter_684_A_13;
+	phases AS;
+	nominal_voltage 120;
+}
+object triplex_line {
+	name trip_line_684_A_h_13;
+	from house_meter_684_A_13;
+	to trip_load_684_A_h_13;
+	phases AS;
+	length 10;
+	configuration triplex_line_configuration_1;
+}
+
+object triplex_line {
+	name trip_line_684_A_L_13;
+	from house_meter_684_A_13;
+	to trip_load_684_A_L_13;
+	phases AS;
+	length 10;
+	configuration triplex_line_configuration_1;
+}
+
+object triplex_line {
+	name trip_line_684_A_14;
+	from trip_node_684_A_2;
+	to house_meter_684_A_14;
+	phases AS;
+	length 10;
+	configuration triplex_line_configuration_1;
+}
+
+object triplex_meter {
+	name house_meter_684_A_14;
+	phases AS;
+	nominal_voltage 120;
+}
+object triplex_line {
+	name trip_line_684_A_h_14;
+	from house_meter_684_A_14;
+	to trip_load_684_A_h_14;
+	phases AS;
+	length 10;
+	configuration triplex_line_configuration_1;
+}
+
+object triplex_line {
+	name trip_line_684_A_L_14;
+	from house_meter_684_A_14;
+	to trip_load_684_A_L_14;
+	phases AS;
+	length 10;
+	configuration triplex_line_configuration_1;
+}
+
+object triplex_line {
+	name trip_line_684_A_15;
+	from trip_node_684_A_2;
+	to house_meter_684_A_15;
+	phases AS;
+	length 10;
+	configuration triplex_line_configuration_1;
+}
+
+object triplex_meter {
+	name house_meter_684_A_15;
+	phases AS;
+	nominal_voltage 120;
+}
+object triplex_line {
+	name trip_line_684_A_h_15;
+	from house_meter_684_A_15;
+	to trip_load_684_A_h_15;
+	phases AS;
+	length 10;
+	configuration triplex_line_configuration_1;
+}
+
+object triplex_line {
+	name trip_line_684_A_L_15;
+	from house_meter_684_A_15;
+	to trip_load_684_A_L_15;
+	phases AS;
+	length 10;
+	configuration triplex_line_configuration_1;
+}
+
+object triplex_line {
+	name trip_line_684_A_16;
+	from trip_node_684_A_2;
+	to house_meter_684_A_16;
+	phases AS;
+	length 10;
+	configuration triplex_line_configuration_1;
+}
+
+object triplex_meter {
+	name house_meter_684_A_16;
+	phases AS;
+	nominal_voltage 120;
+}
+object triplex_line {
+	name trip_line_684_A_h_16;
+	from house_meter_684_A_16;
+	to trip_load_684_A_h_16;
+	phases AS;
+	length 10;
+	configuration triplex_line_configuration_1;
+}
+
+object triplex_line {
+	name trip_line_684_A_L_16;
+	from house_meter_684_A_16;
+	to trip_load_684_A_L_16;
+	phases AS;
+	length 10;
+	configuration triplex_line_configuration_1;
+}
+
+object overhead_line {
+	name OL_684_A_xfmr_684_A_3;
+	phases AN;
+	from meter_684_A;
+	to xfmr_meter_684_A_3;
+	length 10;
+	configuration line_configuration:655;
+}
+object meter {
+	name xfmr_meter_684_A_3;
+	phases AN;
+	nominal_voltage 2401.7771;
+}
+object transformer {
+	name xfmr_684_A_3;
+	phases AS;
+	from xfmr_meter_684_A_3;
+	to trip_node_684_A_3;
+	configuration AS100_config;
+}
+object triplex_node {
+	name trip_node_684_A_3;
+	phases AS;
+	nominal_voltage 120;
+}
+object triplex_line {
+	name trip_line_684_A_17;
+	from trip_node_684_A_3;
+	to house_meter_684_A_17;
+	phases AS;
+	length 10;
+	configuration triplex_line_configuration_1;
+}
+
+object triplex_meter {
+	name house_meter_684_A_17;
+	phases AS;
+	nominal_voltage 120;
+}
+object triplex_line {
+	name trip_line_684_A_h_17;
+	from house_meter_684_A_17;
+	to trip_load_684_A_h_17;
+	phases AS;
+	length 10;
+	configuration triplex_line_configuration_1;
+}
+
+object triplex_line {
+	name trip_line_684_A_L_17;
+	from house_meter_684_A_17;
+	to trip_load_684_A_L_17;
+	phases AS;
+	length 10;
+	configuration triplex_line_configuration_1;
+}
+
+object triplex_line {
+	name trip_line_684_A_18;
+	from trip_node_684_A_3;
+	to house_meter_684_A_18;
+	phases AS;
+	length 10;
+	configuration triplex_line_configuration_1;
+}
+
+object triplex_meter {
+	name house_meter_684_A_18;
+	phases AS;
+	nominal_voltage 120;
+}
+object triplex_line {
+	name trip_line_684_A_h_18;
+	from house_meter_684_A_18;
+	to trip_load_684_A_h_18;
+	phases AS;
+	length 10;
+	configuration triplex_line_configuration_1;
+}
+
+object triplex_line {
+	name trip_line_684_A_L_18;
+	from house_meter_684_A_18;
+	to trip_load_684_A_L_18;
+	phases AS;
+	length 10;
+	configuration triplex_line_configuration_1;
+}
+
+object triplex_line {
+	name trip_line_684_A_19;
+	from trip_node_684_A_3;
+	to house_meter_684_A_19;
+	phases AS;
+	length 10;
+	configuration triplex_line_configuration_1;
+}
+
+object triplex_meter {
+	name house_meter_684_A_19;
+	phases AS;
+	nominal_voltage 120;
+}
+object triplex_line {
+	name trip_line_684_A_h_19;
+	from house_meter_684_A_19;
+	to trip_load_684_A_h_19;
+	phases AS;
+	length 10;
+	configuration triplex_line_configuration_1;
+}
+
+object triplex_line {
+	name trip_line_684_A_L_19;
+	from house_meter_684_A_19;
+	to trip_load_684_A_L_19;
+	phases AS;
+	length 10;
+	configuration triplex_line_configuration_1;
+}
+
+object triplex_line {
+	name trip_line_684_A_20;
+	from trip_node_684_A_3;
+	to house_meter_684_A_20;
+	phases AS;
+	length 10;
+	configuration triplex_line_configuration_1;
+}
+
+object triplex_meter {
+	name house_meter_684_A_20;
+	phases AS;
+	nominal_voltage 120;
+}
+object triplex_line {
+	name trip_line_684_A_h_20;
+	from house_meter_684_A_20;
+	to trip_load_684_A_h_20;
+	phases AS;
+	length 10;
+	configuration triplex_line_configuration_1;
+}
+
+object triplex_line {
+	name trip_line_684_A_L_20;
+	from house_meter_684_A_20;
+	to trip_load_684_A_L_20;
+	phases AS;
+	length 10;
+	configuration triplex_line_configuration_1;
+}
+
+object triplex_line {
+	name trip_line_684_A_21;
+	from trip_node_684_A_3;
+	to house_meter_684_A_21;
+	phases AS;
+	length 10;
+	configuration triplex_line_configuration_1;
+}
+
+object triplex_meter {
+	name house_meter_684_A_21;
+	phases AS;
+	nominal_voltage 120;
+}
+object triplex_line {
+	name trip_line_684_A_h_21;
+	from house_meter_684_A_21;
+	to trip_load_684_A_h_21;
+	phases AS;
+	length 10;
+	configuration triplex_line_configuration_1;
+}
+
+object triplex_line {
+	name trip_line_684_A_L_21;
+	from house_meter_684_A_21;
+	to trip_load_684_A_L_21;
+	phases AS;
+	length 10;
+	configuration triplex_line_configuration_1;
+}
+
+object triplex_line {
+	name trip_line_684_A_22;
+	from trip_node_684_A_3;
+	to house_meter_684_A_22;
+	phases AS;
+	length 10;
+	configuration triplex_line_configuration_1;
+}
+
+object triplex_meter {
+	name house_meter_684_A_22;
+	phases AS;
+	nominal_voltage 120;
+}
+object triplex_line {
+	name trip_line_684_A_h_22;
+	from house_meter_684_A_22;
+	to trip_load_684_A_h_22;
+	phases AS;
+	length 10;
+	configuration triplex_line_configuration_1;
+}
+
+object triplex_line {
+	name trip_line_684_A_L_22;
+	from house_meter_684_A_22;
+	to trip_load_684_A_L_22;
+	phases AS;
+	length 10;
+	configuration triplex_line_configuration_1;
+}
+
+object triplex_line {
+	name trip_line_684_A_23;
+	from trip_node_684_A_3;
+	to house_meter_684_A_23;
+	phases AS;
+	length 10;
+	configuration triplex_line_configuration_1;
+}
+
+object triplex_meter {
+	name house_meter_684_A_23;
+	phases AS;
+	nominal_voltage 120;
+}
+object triplex_line {
+	name trip_line_684_A_h_23;
+	from house_meter_684_A_23;
+	to trip_load_684_A_h_23;
+	phases AS;
+	length 10;
+	configuration triplex_line_configuration_1;
+}
+
+object triplex_line {
+	name trip_line_684_A_L_23;
+	from house_meter_684_A_23;
+	to trip_load_684_A_L_23;
+	phases AS;
+	length 10;
+	configuration triplex_line_configuration_1;
+}
+
+object triplex_line {
+	name trip_line_684_A_24;
+	from trip_node_684_A_3;
+	to house_meter_684_A_24;
+	phases AS;
+	length 10;
+	configuration triplex_line_configuration_1;
+}
+
+object triplex_meter {
+	name house_meter_684_A_24;
+	phases AS;
+	nominal_voltage 120;
+}
+object triplex_line {
+	name trip_line_684_A_h_24;
+	from house_meter_684_A_24;
+	to trip_load_684_A_h_24;
+	phases AS;
+	length 10;
+	configuration triplex_line_configuration_1;
+}
+
+object triplex_line {
+	name trip_line_684_A_L_24;
+	from house_meter_684_A_24;
+	to trip_load_684_A_L_24;
+	phases AS;
+	length 10;
+	configuration triplex_line_configuration_1;
+}
+
+object overhead_line {
+	name OL_684_A_xfmr_684_A_4;
+	phases AN;
+	from meter_684_A;
+	to xfmr_meter_684_A_4;
+	length 10;
+	configuration line_configuration:655;
+}
+object meter {
+	name xfmr_meter_684_A_4;
+	phases AN;
+	nominal_voltage 2401.7771;
+}
+object transformer {
+	name xfmr_684_A_4;
+	phases AS;
+	from xfmr_meter_684_A_4;
+	to trip_node_684_A_4;
+	configuration AS100_config;
+}
+object triplex_node {
+	name trip_node_684_A_4;
+	phases AS;
+	nominal_voltage 120;
+}
+object triplex_line {
+	name trip_line_684_A_25;
+	from trip_node_684_A_4;
+	to house_meter_684_A_25;
+	phases AS;
+	length 10;
+	configuration triplex_line_configuration_1;
+}
+
+object triplex_meter {
+	name house_meter_684_A_25;
+	phases AS;
+	nominal_voltage 120;
+}
+object triplex_line {
+	name trip_line_684_A_h_25;
+	from house_meter_684_A_25;
+	to trip_load_684_A_h_25;
+	phases AS;
+	length 10;
+	configuration triplex_line_configuration_1;
+}
+
+object triplex_line {
+	name trip_line_684_A_L_25;
+	from house_meter_684_A_25;
+	to trip_load_684_A_L_25;
+	phases AS;
+	length 10;
+	configuration triplex_line_configuration_1;
+}
+
+object triplex_line {
+	name trip_line_684_A_26;
+	from trip_node_684_A_4;
+	to house_meter_684_A_26;
+	phases AS;
+	length 10;
+	configuration triplex_line_configuration_1;
+}
+
+object triplex_meter {
+	name house_meter_684_A_26;
+	phases AS;
+	nominal_voltage 120;
+}
+object triplex_line {
+	name trip_line_684_A_h_26;
+	from house_meter_684_A_26;
+	to trip_load_684_A_h_26;
+	phases AS;
+	length 10;
+	configuration triplex_line_configuration_1;
+}
+
+object triplex_line {
+	name trip_line_684_A_L_26;
+	from house_meter_684_A_26;
+	to trip_load_684_A_L_26;
+	phases AS;
+	length 10;
+	configuration triplex_line_configuration_1;
+}
+
+object triplex_line {
+	name trip_line_684_A_27;
+	from trip_node_684_A_4;
+	to house_meter_684_A_27;
+	phases AS;
+	length 10;
+	configuration triplex_line_configuration_1;
+}
+
+object triplex_meter {
+	name house_meter_684_A_27;
+	phases AS;
+	nominal_voltage 120;
+}
+object triplex_line {
+	name trip_line_684_A_h_27;
+	from house_meter_684_A_27;
+	to trip_load_684_A_h_27;
+	phases AS;
+	length 10;
+	configuration triplex_line_configuration_1;
+}
+
+object triplex_line {
+	name trip_line_684_A_L_27;
+	from house_meter_684_A_27;
+	to trip_load_684_A_L_27;
+	phases AS;
+	length 10;
+	configuration triplex_line_configuration_1;
+}
+
+object triplex_line {
+	name trip_line_684_A_28;
+	from trip_node_684_A_4;
+	to house_meter_684_A_28;
+	phases AS;
+	length 10;
+	configuration triplex_line_configuration_1;
+}
+
+object triplex_meter {
+	name house_meter_684_A_28;
+	phases AS;
+	nominal_voltage 120;
+}
+object triplex_line {
+	name trip_line_684_A_h_28;
+	from house_meter_684_A_28;
+	to trip_load_684_A_h_28;
+	phases AS;
+	length 10;
+	configuration triplex_line_configuration_1;
+}
+
+object triplex_line {
+	name trip_line_684_A_L_28;
+	from house_meter_684_A_28;
+	to trip_load_684_A_L_28;
+	phases AS;
+	length 10;
+	configuration triplex_line_configuration_1;
+}
+
+object triplex_line {
+	name trip_line_684_A_29;
+	from trip_node_684_A_4;
+	to house_meter_684_A_29;
+	phases AS;
+	length 10;
+	configuration triplex_line_configuration_1;
+}
+
+object triplex_meter {
+	name house_meter_684_A_29;
+	phases AS;
+	nominal_voltage 120;
+}
+object triplex_line {
+	name trip_line_684_A_h_29;
+	from house_meter_684_A_29;
+	to trip_load_684_A_h_29;
+	phases AS;
+	length 10;
+	configuration triplex_line_configuration_1;
+}
+
+object triplex_line {
+	name trip_line_684_A_L_29;
+	from house_meter_684_A_29;
+	to trip_load_684_A_L_29;
+	phases AS;
+	length 10;
+	configuration triplex_line_configuration_1;
+}
+
+object triplex_line {
+	name trip_line_684_A_30;
+	from trip_node_684_A_4;
+	to house_meter_684_A_30;
+	phases AS;
+	length 10;
+	configuration triplex_line_configuration_1;
+}
+
+object triplex_meter {
+	name house_meter_684_A_30;
+	phases AS;
+	nominal_voltage 120;
+}
+object triplex_line {
+	name trip_line_684_A_h_30;
+	from house_meter_684_A_30;
+	to trip_load_684_A_h_30;
+	phases AS;
+	length 10;
+	configuration triplex_line_configuration_1;
+}
+
+object triplex_line {
+	name trip_line_684_A_L_30;
+	from house_meter_684_A_30;
+	to trip_load_684_A_L_30;
+	phases AS;
+	length 10;
+	configuration triplex_line_configuration_1;
+}
+
+object triplex_line {
+	name trip_line_684_A_31;
+	from trip_node_684_A_4;
+	to house_meter_684_A_31;
+	phases AS;
+	length 10;
+	configuration triplex_line_configuration_1;
+}
+
+object triplex_meter {
+	name house_meter_684_A_31;
+	phases AS;
+	nominal_voltage 120;
+}
+object triplex_line {
+	name trip_line_684_A_h_31;
+	from house_meter_684_A_31;
+	to trip_load_684_A_h_31;
+	phases AS;
+	length 10;
+	configuration triplex_line_configuration_1;
+}
+
+object triplex_line {
+	name trip_line_684_A_L_31;
+	from house_meter_684_A_31;
+	to trip_load_684_A_L_31;
+	phases AS;
+	length 10;
+	configuration triplex_line_configuration_1;
+}
+
+object triplex_line {
+	name trip_line_684_A_32;
+	from trip_node_684_A_4;
+	to house_meter_684_A_32;
+	phases AS;
+	length 10;
+	configuration triplex_line_configuration_1;
+}
+
+object triplex_meter {
+	name house_meter_684_A_32;
+	phases AS;
+	nominal_voltage 120;
+}
+object triplex_line {
+	name trip_line_684_A_h_32;
+	from house_meter_684_A_32;
+	to trip_load_684_A_h_32;
+	phases AS;
+	length 10;
+	configuration triplex_line_configuration_1;
+}
+
+object triplex_line {
+	name trip_line_684_A_L_32;
+	from house_meter_684_A_32;
+	to trip_load_684_A_L_32;
+	phases AS;
+	length 10;
+	configuration triplex_line_configuration_1;
+}
+
+object overhead_line {
+	name OL_684_A_xfmr_684_A_5;
+	phases AN;
+	from meter_684_A;
+	to xfmr_meter_684_A_5;
+	length 10;
+	configuration line_configuration:655;
+}
+object meter {
+	name xfmr_meter_684_A_5;
+	phases AN;
+	nominal_voltage 2401.7771;
+}
+object transformer {
+	name xfmr_684_A_5;
+	phases AS;
+	from xfmr_meter_684_A_5;
+	to trip_node_684_A_5;
+	configuration AS100_config;
+}
+object triplex_node {
+	name trip_node_684_A_5;
+	phases AS;
+	nominal_voltage 120;
+}
+object triplex_line {
+	name trip_line_684_A_33;
+	from trip_node_684_A_5;
+	to house_meter_684_A_33;
+	phases AS;
+	length 10;
+	configuration triplex_line_configuration_1;
+}
+
+object triplex_meter {
+	name house_meter_684_A_33;
+	phases AS;
+	nominal_voltage 120;
+}
+object triplex_line {
+	name trip_line_684_A_h_33;
+	from house_meter_684_A_33;
+	to trip_load_684_A_h_33;
+	phases AS;
+	length 10;
+	configuration triplex_line_configuration_1;
+}
+
+object triplex_line {
+	name trip_line_684_A_L_33;
+	from house_meter_684_A_33;
+	to trip_load_684_A_L_33;
+	phases AS;
+	length 10;
+	configuration triplex_line_configuration_1;
+}
+
+object triplex_line {
+	name trip_line_684_A_34;
+	from trip_node_684_A_5;
+	to house_meter_684_A_34;
+	phases AS;
+	length 10;
+	configuration triplex_line_configuration_1;
+}
+
+object triplex_meter {
+	name house_meter_684_A_34;
+	phases AS;
+	nominal_voltage 120;
+}
+object triplex_line {
+	name trip_line_684_A_h_34;
+	from house_meter_684_A_34;
+	to trip_load_684_A_h_34;
+	phases AS;
+	length 10;
+	configuration triplex_line_configuration_1;
+}
+
+object triplex_line {
+	name trip_line_684_A_L_34;
+	from house_meter_684_A_34;
+	to trip_load_684_A_L_34;
+	phases AS;
+	length 10;
+	configuration triplex_line_configuration_1;
+}
+
+object triplex_line {
+	name trip_line_684_A_35;
+	from trip_node_684_A_5;
+	to house_meter_684_A_35;
+	phases AS;
+	length 10;
+	configuration triplex_line_configuration_1;
+}
+
+object triplex_meter {
+	name house_meter_684_A_35;
+	phases AS;
+	nominal_voltage 120;
+}
+object triplex_line {
+	name trip_line_684_A_h_35;
+	from house_meter_684_A_35;
+	to trip_load_684_A_h_35;
+	phases AS;
+	length 10;
+	configuration triplex_line_configuration_1;
+}
+
+object triplex_line {
+	name trip_line_684_A_L_35;
+	from house_meter_684_A_35;
+	to trip_load_684_A_L_35;
+	phases AS;
+	length 10;
+	configuration triplex_line_configuration_1;
+}
+
+object triplex_line {
+	name trip_line_684_A_36;
+	from trip_node_684_A_5;
+	to house_meter_684_A_36;
+	phases AS;
+	length 10;
+	configuration triplex_line_configuration_1;
+}
+
+object triplex_meter {
+	name house_meter_684_A_36;
+	phases AS;
+	nominal_voltage 120;
+}
+object triplex_line {
+	name trip_line_684_A_h_36;
+	from house_meter_684_A_36;
+	to trip_load_684_A_h_36;
+	phases AS;
+	length 10;
+	configuration triplex_line_configuration_1;
+}
+
+object triplex_line {
+	name trip_line_684_A_L_36;
+	from house_meter_684_A_36;
+	to trip_load_684_A_L_36;
+	phases AS;
+	length 10;
+	configuration triplex_line_configuration_1;
+}
+
+object triplex_line {
+	name trip_line_684_A_37;
+	from trip_node_684_A_5;
+	to house_meter_684_A_37;
+	phases AS;
+	length 10;
+	configuration triplex_line_configuration_1;
+}
+
+object triplex_meter {
+	name house_meter_684_A_37;
+	phases AS;
+	nominal_voltage 120;
+}
+object triplex_line {
+	name trip_line_684_A_h_37;
+	from house_meter_684_A_37;
+	to trip_load_684_A_h_37;
+	phases AS;
+	length 10;
+	configuration triplex_line_configuration_1;
+}
+
+object triplex_line {
+	name trip_line_684_A_L_37;
+	from house_meter_684_A_37;
+	to trip_load_684_A_L_37;
+	phases AS;
+	length 10;
+	configuration triplex_line_configuration_1;
+}
+
+object triplex_line {
+	name trip_line_684_A_38;
+	from trip_node_684_A_5;
+	to house_meter_684_A_38;
+	phases AS;
+	length 10;
+	configuration triplex_line_configuration_1;
+}
+
+object triplex_meter {
+	name house_meter_684_A_38;
+	phases AS;
+	nominal_voltage 120;
+}
+object triplex_line {
+	name trip_line_684_A_h_38;
+	from house_meter_684_A_38;
+	to trip_load_684_A_h_38;
+	phases AS;
+	length 10;
+	configuration triplex_line_configuration_1;
+}
+
+object triplex_line {
+	name trip_line_684_A_L_38;
+	from house_meter_684_A_38;
+	to trip_load_684_A_L_38;
+	phases AS;
+	length 10;
+	configuration triplex_line_configuration_1;
+}
+
+object triplex_line {
+	name trip_line_684_A_39;
+	from trip_node_684_A_5;
+	to house_meter_684_A_39;
+	phases AS;
+	length 10;
+	configuration triplex_line_configuration_1;
+}
+
+object triplex_meter {
+	name house_meter_684_A_39;
+	phases AS;
+	nominal_voltage 120;
+}
+object triplex_line {
+	name trip_line_684_A_h_39;
+	from house_meter_684_A_39;
+	to trip_load_684_A_h_39;
+	phases AS;
+	length 10;
+	configuration triplex_line_configuration_1;
+}
+
+object triplex_line {
+	name trip_line_684_A_L_39;
+	from house_meter_684_A_39;
+	to trip_load_684_A_L_39;
+	phases AS;
+	length 10;
+	configuration triplex_line_configuration_1;
+}
+
+object triplex_line {
+	name trip_line_684_A_40;
+	from trip_node_684_A_5;
+	to house_meter_684_A_40;
+	phases AS;
+	length 10;
+	configuration triplex_line_configuration_1;
+}
+
+object triplex_meter {
+	name house_meter_684_A_40;
+	phases AS;
+	nominal_voltage 120;
+}
+object triplex_line {
+	name trip_line_684_A_h_40;
+	from house_meter_684_A_40;
+	to trip_load_684_A_h_40;
+	phases AS;
+	length 10;
+	configuration triplex_line_configuration_1;
+}
+
+object triplex_line {
+	name trip_line_684_A_L_40;
+	from house_meter_684_A_40;
+	to trip_load_684_A_L_40;
+	phases AS;
 	length 10;
 	configuration triplex_line_configuration_1;
 }
