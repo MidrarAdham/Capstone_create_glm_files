@@ -66,6 +66,43 @@ def trips_611(counter,From):
 
 for i in range(1,6):
     trips_611(i,"trip_node_611_C_"+str(i))
+#########################################################################################################
+#########################################################################################################
+#########################################################################################################
+
+## STARTING NODE 684 A
+
+#########################################################################################################
+#########################################################################################################
+#########################################################################################################
+def trips_684(counter,From):
+    
+    node_OL = overhead_lines_objects("OL_684_C_xfmr_684_C_"+str(counter),"CN","meter_684_C","xfmr_meter_684_C_"+str(counter),"605")
+    print(node_OL)
+    HS_meter = meter_object("xfmr_meter_684_C_"+str(counter),"CN")
+    print(HS_meter)
+    xfmr = center_tapped_xfmr_object("xfmr_684_C_"+str(counter),"CS","xfmr_meter_684_C_"+str(counter),"trip_node_684_C_"+str(counter),"CS100_config")
+    print(xfmr)
+    trip_line = triplex_line("xfmr_trip_line_684_C_"+str(counter),"xfmr_meter_684_C_"+str(counter),"trip_node_684_C_"+str(counter),"CS")
+#    print(trip_line)
+    trip_nodes = trip_node("trip_node_684_C_"+str(counter),"CS")
+    print(trip_nodes)
+    for k in range(1,9):
+        trip_line_counter = 8*(counter - 1) + k
+        meter = trip_meter_object("house_meter_684_C_"+str(trip_line_counter),"CS")
+        trip_lines = triplex_line("trip_line_684_C_"+str(trip_line_counter),From,"house_meter_684_C_"+str(trip_line_counter),"CS")
+        trip_lines_H = triplex_line("trip_line_684_C_h_"+str(trip_line_counter),"house_meter_684_C_"+str(trip_line_counter),"trip_load_684_C_h"+"_"+str(trip_line_counter),"CS")
+        trip_lines_L = triplex_line("trip_line_684_C_L_"+str(trip_line_counter),"house_meter_684_C_"+str(trip_line_counter),"trip_load_684_C_L"+"_"+str(trip_line_counter),"CS")
+        #trip_load_player = trip_load_with_player("trip_load_652_A_h_"+str(trip_line_counter),"AS","_652_A_"+str())
+
+
+        print(trip_lines)
+        print(meter)
+        print(trip_lines_H)
+        print(trip_lines_L)
+
+for i in range(1,6):
+    trips_684(i,"trip_node_684_C_"+str(i))
 
 '''
 for result in results:
