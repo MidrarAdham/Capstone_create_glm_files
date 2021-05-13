@@ -28,6 +28,9 @@ nodes = [
          (611, 'C', 'CN', 'CS', 605), 
          (684, 'C', 'CN', 'CS', 605),
          (684, 'A', 'AN', 'AS', 655),
+         (645, 'B', 'BN', 'BS', 656),
+         (645, 'C', 'CN', 'CS', 605),
+         (633, 'A', 'AN', 'AS', 655)
         ]
 for (i, (node, label, hsPhase, lsPhase, lineConfig)) in enumerate(nodes):
     counter = 1
