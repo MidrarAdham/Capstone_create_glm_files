@@ -1,0 +1,165 @@
+clock {
+	timestamp '2021-01-06 0:00:00';
+	stoptime '2020-01-12 23:45:00';
+}
+
+
+module powerflow;
+module residential {
+    implicit_enduses NONE;
+}
+
+
+module market;
+module tape;
+
+//#include "./try.glm"
+
+object overhead_line_conductor:100 {
+	geometric_mean_radius 0.0244;
+	resistance 0.306;
+}
+
+object overhead_line_conductor:101 {
+	geometric_mean_radius 0.00814;
+	resistance 0.592;
+}
+
+object line_spacing:200 {
+	distance_AB 2.5;
+	distance_BC 4.5;
+	distance_AC 7.0;
+	distance_AN 5.656854;
+	distance_BN 4.272002;
+	distance_CN 5.0;
+}
+
+object line_configuration:300 {
+	conductor_A overhead_line_conductor:100;
+	conductor_B overhead_line_conductor:100;
+	conductor_C overhead_line_conductor:100;
+	conductor_N overhead_line_conductor:101;
+	spacing line_spacing:200;
+}
+
+object transformer_configuration:400 {
+	connect_type 1;
+	power_rating 6000;
+	powerA_rating 2000;
+	powerB_rating 2000;
+	powerC_rating 2000;
+	primary_voltage 12470;
+	secondary_voltage 4160;
+	resistance 0.01;
+	reactance 0.06;
+}
+
+object node {
+	name node1;
+	phases "ABCN";
+	voltage_A +7199.558+0.000j;
+	voltage_B -3599.779-6235.000j;
+	voltage_C -3599.779+6235.000j;
+	nominal_voltage 7200;
+}
+
+object transformer:23 {
+	phases "ABCN";
+	from node1;
+	to node2;
+	configuration transformer_configuration:400;
+}
+object node {
+	name node2;
+	phases "ABCN";
+	voltage_A +2401.777+0.000j;
+	voltage_B -1200.889-2080.000j;
+	voltage_C -1200.889+2080.000j;
+	nominal_voltage 2400;
+}
+
+object triplex_line_conductor {
+    name tp_line_conductor;
+    resistance 0.97;
+    geometric_mean_radius 0.0111;
+};
+
+object triplex_line_configuration {
+    name triplex_line_configuration_1;
+    conductor_1 tp_line_conductor;
+    conductor_2 tp_line_conductor;
+    conductor_N tp_line_conductor;
+    insulation_thickness 0.08;
+    diameter 0.368;
+}
+
+object transformer_configuration {
+    name CS_config;
+    connect_type SINGLE_PHASE_CENTER_TAPPED;
+    install_type POLETOP;
+    powerC_rating 75;
+    primary_voltage 2401;
+    secondary_voltage 120.000;
+    impedance 0.006+0.0136j;
+}
+
+    ///////////////////////////////
+    // Triplex Lines, Nodes, and Transformers
+    ///////////////////////////////
+object transformer {
+	name center_tap_1;
+	phases CS;
+	from node2;
+	to trip_node1;
+	configuration CS_config;
+}
+
+object triplex_node {
+	name trip_node1;
+	phases CS;
+	nominal_voltage 120;
+}
+
+object triplex_line {
+	name trip_line1;
+	phases CS;
+	from trip_node1;
+	to trip_meter1;
+	length 0;
+	configuration triplex_line_configuration_1;
+}
+
+object triplex_meter {
+	name trip_meter1;
+	phases CS;
+	nominal_voltage 120;
+	object recorder {
+		name rec1;
+		file "shahad.csv";
+		interval 60;
+		property measured_voltage_1;
+	};
+}
+object triplex_line {
+	name trip_line2;
+	phases CS;
+	from trip_meter1;
+	to trip1;
+	length 0;
+	configuration triplex_line_configuration_1;
+}
+
+object triplex_load {
+	name trip1;
+	phases "CS";
+	voltage_1 120;
+	voltage_2 120;
+	voltage_N 0;
+	nominal_voltage 120;
+//	constant_power_1 8000;
+	object player {
+		file "HOUSE1.csv";
+		property constant_power_1;
+	};
+//	constant_power_1 demand;
+}

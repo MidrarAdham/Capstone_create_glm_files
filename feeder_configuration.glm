@@ -27,7 +27,7 @@ implicit_enduses NONE;
 ANSI_voltage_check TRUE;
 };
 
-#include "./triploads.glm"
+//#include "./triploads.glm"
 
 
 class player {
